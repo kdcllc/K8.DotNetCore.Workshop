@@ -1,0 +1,22 @@
+# https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: convert-job
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: convert-job
+            image: k8.demo.cronjobs:v1
+            command: ["./K8.LongProcess"]
+            args:
+            - "-t Convert"
+          restartPolicy: OnFailure

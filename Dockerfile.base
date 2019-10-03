@@ -1,0 +1,36 @@
+# BUILD docker build -t k8.demo.base:v1 -f "Dockerfile.base" .
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
+WORKDIR /app
+
+
+RUN apk add --no-cache bash \
+    && apk add curl \
+    && wget -qO- https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh | bash
+
+ENV NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED=true
+
+ONBUILD ARG PAT
+ONBUILD ARG FEED
+
+#NUGET
+ONBUILD ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS "{\"endpointCredentials\": [{\"endpoint\":\"${FEED}\", \"username\":\"build\", \"password\":\"${PAT}\"}]}"
+#NUGET
+
+ONBUILD RUN if [ -z "$PAT" ]; then \
+      echo "\e[31mMake sure the PAT environment variable has been provided.\e[0m" \
+      && exit 1; \
+   fi
+
+ONBUILD COPY ./build/ ./build/
+ONBUILD COPY ./Directory.Build.props ./Directory.Build.props
+ONBUILD COPY ./Directory.Build.targets ./Directory.Build.targets
+ONBUILD COPY ./*.sln ./
+
+# copy csproj and restore as distinct layers
+ONBUILD COPY src/*/*.csproj ./
+ONBUILD RUN for file in $(ls *.csproj); do mkdir -p src/${file%.*}/ && mv $file src/${file%.*}/; done
+
+ONBUILD RUN dotnet restore *.sln
+
+ONBUILD COPY . .
+ONBUILD RUN dotnet build *.sln --no-restore

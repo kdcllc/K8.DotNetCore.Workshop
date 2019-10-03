@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  base:
+    image: k8.demo.base:v1
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+
+  frontend:
+    image: k8.demo.frontend:v1
+    build:
+      context: .
+      dockerfile: src/K8.FrontEnd/Dockerfile
+      args:
+        PAT: ${PAT}
+        FEED: ${FEED}
+    ports:
+      - "5000:5000"
+
+  cronjobs:
+    image: k8.demo.cronjobs:v1
+    build:
+      context: .
+      dockerfile: src/K8.LongProcess/Dockerfile
+      args:
+        PAT: ${PAT}
+        FEED: ${FEED}

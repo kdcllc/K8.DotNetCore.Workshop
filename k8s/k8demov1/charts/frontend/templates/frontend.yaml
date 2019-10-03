@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8-frontend-app
+spec:
+  selector:
+    matchLabels:
+      app: k8-frontend-app
+  template:
+    metadata:
+      labels:
+        app: k8-frontend-app
+    spec:
+      containers:
+      - name: k8-frontend-app
+        image: k8.demo.frontend:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000

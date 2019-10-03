@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    </PropertyGroup>
+
+   <ItemGroup Label="Analyzers">
+    <PackageReference Include="Bet.CodeAnalyzers" Version="1.0.6" PrivateAssets="All" />
+  </ItemGroup>
+</Project>

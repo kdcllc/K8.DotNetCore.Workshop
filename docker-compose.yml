@@ -15,6 +15,9 @@ services:
       args:
         PAT: ${PAT}
         FEED: ${FEED}
+      environment:
+      - MSI_ENDPOINT=${MSI_ENDPOINT}
+      - MSI_SECRET=${MSI_SECRET}
     ports:
       - "5000:5000"
 
@@ -26,3 +29,6 @@ services:
       args:
         PAT: ${PAT}
         FEED: ${FEED}
+      environment:
+      - MSI_ENDPOINT=${MSI_ENDPOINT}
+      - MSI_SECRET=${MSI_SECRET}

@@ -1,6 +1,6 @@
 # Kubernetes DotNetCore Workshop
 
-This workshop will provide with ability to learn the basic Kubernetes from DotNetCore developer.
+This workshop will provide with ability to learn the basic Kubernetes from DotNetCore developer perspective.
 
 - ApsNetCore 3.0 Azure Key Vault
 - DotNetCore 3.0 Worker Hosted in the Cluster and ran as CronJob

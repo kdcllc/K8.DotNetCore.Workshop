@@ -38,12 +38,22 @@ helm list --short
 helm status [release name] | less
 ```
 
-### Create version 1.0
+### Install
 
 ```bash
-    helm install k8demov1  --namespace dev
+    helm install  k8netcorev1 -n dev-k8demo
+
+    helm install  k8netcorev2 -n dev-k8demo
+
 ```
 
+### Delete helm chart deployment
+
+```bash
+    # delete specific deployment
+    helm delete dev-k8demo --purge
+
+```
 
 ## Local Docker and Kubernates Development on Windows 10
 
@@ -88,11 +98,12 @@ kubectl get svc --namespace=ingress-nginx
     docker rmi -f $(docker images -f "dangling=true" -q)
 ```
 
+[http://k8-frontend-app.local/weatherforecast](http://k8-frontend-app.local/weatherforecast)
 
 ## Hosts file update to include
 
 C:\Windows\System32\drivers\etc\hosts
 
-```
-    127.0.0.1 kubernetes.docker.internal k8-frontend-app.com
+```txt
+    127.0.0.1 kubernetes.docker.internal k8-frontend-app.local
 ```

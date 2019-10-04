@@ -15,10 +15,17 @@ namespace K8.LongProcess.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public Task<int> ExecuteAsync(CancellationToken cancellationToken)
+        public async Task<int> ExecuteAsync(int count, int delayTime, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Executing {serviceName}", nameof(ConvertService));
-            return Task.FromResult(0);
+            cancellationToken.ThrowIfCancellationRequested();
+
+            for (var i = 0; i < count; i++)
+            {
+                _logger.LogInformation("Executing {serviceName} - {count}", nameof(ConvertService), i);
+                await Task.Delay(TimeSpan.FromSeconds(delayTime));
+            }
+
+            return await Task.FromResult(0);
         }
     }
 }

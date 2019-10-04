@@ -7,16 +7,18 @@ metadata:
 spec:
   schedule: "*/2 * * * *"
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 3
-  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: import-job
-            image: k8.demo.cronjobs:v1
+            image: com.io/k8.demo.cronjobs:v1
             command: ["./K8.LongProcess"]
             args:
             - "-t Import"
+            - "-d 20"
+            - "-c 10"
           restartPolicy: OnFailure

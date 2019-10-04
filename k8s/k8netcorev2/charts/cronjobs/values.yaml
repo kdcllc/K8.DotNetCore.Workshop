@@ -1,0 +1,36 @@
+# Default values for cronjobs.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: com.io
+  name: k8.demo.cronjobs
+  tag: v1
+  pullPolicy: IfNotPresent
+
+jobs:
+  - name: convert-job
+    schedule: "0/1 * * * *"
+    command: ["./K8.LongProcess"]
+    args:
+      - "-t Convert"
+      - "-d 10"
+      - "-c 5"
+    failedJobsHistoryLimit: 2
+    successfulJobsHistoryLimit: 1
+    concurrencyPolicy: Forbid
+    restartPolicy: OnFailure
+    suspendCronJob: false
+  - name: import-job
+    schedule: "0/2 * * * *"
+    command: ["./K8.LongProcess"]
+    args:
+      - "-t Import"
+      - "-d 20"
+      - "-c 10"
+    failedJobsHistoryLimit: 2
+    successfulJobsHistoryLimit: 1
+    concurrencyPolicy: Forbid
+    restartPolicy: OnFailure
+    suspendCronJob: false
+
+

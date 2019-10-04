@@ -1,0 +1,43 @@
+{{- $chart_name := .Chart.Name }}
+{{- $chart_version := .Chart.Version | replace "+" "_" }}
+{{- $release_name := .Release.Name }}
+{{- $namespace := .Values.namespace }}
+{{- $repository := .Values.image.repository -}}
+{{- $image := .Values.image.name -}}
+{{- $tag := .Values.image.tag -}}
+{{- $imagePolicy := .Values.image.pullPolicy -}}
+{{- $root := . -}}
+{{- $name := include "cronjobs.name" . }}
+
+{{- range $job := .Values.jobs }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ $name }}-{{ $job.name }}
+  labels:
+    chart: {{ $chart_name }}
+    release: {{ $release_name }}
+spec:
+  schedule: {{ $job.schedule | quote }}
+  successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
+  concurrencyPolicy: {{ $job.concurrencyPolicy }}
+  suspend: {{ $job.suspendCronJob }}
+  failedJobsHistoryLimit: {{ $job.failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: {{ $name }}-{{ $job.name }}
+            cron: {{ $name }}-{{ $job.name }}
+        spec:
+          containers:
+          - name: {{ $name }}-{{ $job.name }}
+            image: "{{ $repository }}/{{ $image }}:{{ $tag }}"
+            imagePullPolicy: {{ $imagePolicy }}
+            command: {{ $job.command }}
+            args:
+{{ toYaml $job.args | indent 12 }}
+          restartPolicy: {{ $job.restartPolicy }}
+  {{- end }}

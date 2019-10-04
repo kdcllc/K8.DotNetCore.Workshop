@@ -15,4 +15,4 @@ docker-compose.*.yml
 Apigee
 Rest
 
-.pptx
+*.pptx

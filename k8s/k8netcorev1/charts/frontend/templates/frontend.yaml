@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: k8-frontend-app
-        image: k8.demo.frontend:v1
+        image: com.io/k8.demo.frontend:v1
         resources:
           limits:
             memory: "128Mi"

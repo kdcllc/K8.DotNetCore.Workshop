@@ -32,12 +32,20 @@ namespace K8.LongProcess
         [Required]
         public ProcessType ServiceType { get; set; }
 
+        [Option("-d", Description = "Specifies the delay time for the job in seconds.")]
+        [Required]
+        public int DelayTime { get; set; }
+
+        [Option("-c", Description = "Specifies the count iteration for the job.")]
+        [Required]
+        public int Count { get; set; }
+
         public async Task OnExecuteAsync()
         {
             try
             {
                 _logger.LogInformation("Running the long running data process: {processType}", ServiceType);
-                await _dataFactory(ServiceType).ExecuteAsync(_applicationLifetime.ApplicationStopping);
+                await _dataFactory(ServiceType).ExecuteAsync(Count, DelayTime, _applicationLifetime.ApplicationStopping);
             }
             catch (Exception ex)
             {

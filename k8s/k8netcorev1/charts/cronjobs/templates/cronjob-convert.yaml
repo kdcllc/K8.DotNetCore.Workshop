@@ -7,16 +7,18 @@ metadata:
 spec:
   schedule: "*/1 * * * *"
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 3
-  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: convert-job
-            image: k8.demo.cronjobs:v1
+            image: com.io/k8.demo.cronjobs:v1
             command: ["./K8.LongProcess"]
             args:
             - "-t Convert"
+            - "-d 10"
+            - "-c 5"
           restartPolicy: OnFailure

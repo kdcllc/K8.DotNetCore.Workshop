@@ -31,10 +31,16 @@ spec:
             httpGet:
               path: /liveness
               port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 90
           readinessProbe:
             httpGet:
               path: /healthy
               port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 90
           resources:
 {{ toYaml .Values.resources | indent 12 }}
 

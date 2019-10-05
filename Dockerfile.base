@@ -1,7 +1,6 @@
-# BUILD docker build -t k8.demo.base:v1 -f "Dockerfile.base" .
+# BUILD docker build -t com.io/k8.demo.base:v1 -f "Dockerfile.base" .
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
 WORKDIR /app
-
 
 RUN apk add --no-cache bash \
     && apk add curl \

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using K8.LongProcess.Services;
 
 using McMaster.Extensions.CommandLineUtils;
-
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -58,6 +58,18 @@ namespace K8.LongProcess
         {
             // creates custom HostBuilder
             var hostBuilder = K8HostBuilder.CreateDefaultBuilder(args);
+
+            hostBuilder.ConfigureAppConfiguration((hostingContext, configBuilder) =>
+            {
+                configBuilder.UseKeyVaultConfiguration(
+                    hostingContext.HostingEnvironment.IsDevelopment(),
+                    reloadInterval: TimeSpan.FromSeconds(20));
+
+                if (hostingContext.HostingEnvironment.IsDevelopment())
+                {
+                    configBuilder.Build().DebugConfigurations();
+                }
+            });
 
             hostBuilder.ConfigureServices((context, services) =>
             {

@@ -1,6 +1,9 @@
 using System;
+
 using K8.FrontEnd.Services;
+
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -18,6 +21,18 @@ namespace K8.FrontEnd
             return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration((hostingContext, configBuilder) =>
+                    {
+                       configBuilder.UseKeyVaultConfiguration(
+                           hostingContext.HostingEnvironment.IsDevelopment(),
+                           reloadInterval: TimeSpan.FromSeconds(20));
+
+                       if (hostingContext.HostingEnvironment.IsDevelopment())
+                        {
+                            configBuilder.Build().DebugConfigurations();
+                        }
+                    });
+
                     webBuilder.UseStartup<Startup>();
 
                     // works together with SigtermCheck

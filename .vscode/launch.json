@@ -10,17 +10,18 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/K8.FrontEnd/bin/Debug/netcoreapp3.0/K8.FrontEnd.dll",
+            "program": "${workspaceFolder}/src/K8.FrontEnd/bin/container/Debug/netcoreapp3.0/K8.FrontEnd.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/K8.FrontEnd",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
                 "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"                
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS":"https://+:9001;http://+:9000"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

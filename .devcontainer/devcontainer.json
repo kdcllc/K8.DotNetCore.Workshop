@@ -3,14 +3,13 @@
 {
 	"name": "K8.DotNetCore.Workshop",
 
-    "dockerComposeFile": "Dockerfile",
+    "dockerComposeFile": "../docker-compose.vscode.yaml",
+    "service": "vscode",
 	"workspaceFolder": "/workspace/K8.DotNetCore.Workshop",
-    "shutdownAction": "stopCompose",
 
-	"appPort": [9000 , "9000"],
+    "shutdownAction": "none",
 
-	// Uncomment the next line if you want to add in default container specific settings.json values
-	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+	"appPort": [9000 , "9000", 9001, "9001", 8001, "8001"],
 
 	// Uncomment the next line to run commands after the container is created.
 	"postCreateCommand": "dotnet restore",
@@ -24,18 +23,15 @@
 		// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 		// "-u", "vscode",
 
-		"--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
-		"--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost",
+		// "--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
+		"--mount", "type=bind,source=${env:HOME}/.kube,target=/root/.kube",
 
-		// Uncomment the next line to also sync certs in your .minikube folder
-		// "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost",
-
-        "-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-e", "MSI_ENDPOINT=http://host.docker.internal:5050/oauth2/token",
-        "-e", "MSI_SECRET=15942c15-f426-4205-8396-439c8bab7499",
+		// "-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+		"-e", "MSI_ENDPOINT=http://host.docker.internal:5050/oauth2/token",
+		"-e", "MSI_SECRET=cdf37d81-9749-4ae6-9646-5daf9540a397"
 		"-v","/var/run/docker.sock:/var/run/docker.sock",
-		"-v", "$HOME/.kube:/root/.kube-localhost"
-    ],
+		"-v", "$HOME/.kube:/root/.kube"
+	],
 
 	"extensions": [
         "docsmsft.docs-authoring-pack",
@@ -52,5 +48,18 @@
         "redhat.vscode-yaml",
         "streetsidesoftware.code-spell-checker",
         "technosophos.vscode-helm"
-	]
+	],
+
+	"settings": {
+		"remote.extensionKind": {
+			"ms-azuretools.vscode-docker": "workspace"
+		},
+		"vs-kubernetes": {
+			"vs-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+			"vs-kubernetes.helm-path": "/root/.vs-kubernetes/tools/helm/linux-amd64/helm",
+			"vs-kubernetes.draft-path": "/root/.vs-kubernetes/tools/draft/linux-amd64/draft",
+			"vs-kubernetes.minikube-path": "/root/.vs-kubernetes/tools/minikube/linux-amd64/minikube",
+			"imageBuildTool": "Docker"
+		}
+	}
 }

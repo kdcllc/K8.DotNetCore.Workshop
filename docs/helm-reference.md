@@ -1,13 +1,10 @@
-# Helm commands reference
-
-## Helm Templates
-
+# Helm Templates Reference
 1. Static
 
 ```bash
     helm template
     helm template -x templates/service.yaml
-    #workks without tiller and static release-name
+    #works without tiller and static release-name
 ```
 
 2. Dynamic

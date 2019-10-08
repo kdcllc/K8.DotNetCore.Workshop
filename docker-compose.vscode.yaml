@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  vscode:
+    image: com.io/k8.demo.vscode:v1
+    build:
+      context: .
+      dockerfile: Dockerfile.vscode
+    environment:
+      - MSI_ENDPOINT=${MSI_ENDPOINT}
+      - MSI_SECRET=${MSI_SECRET}
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:9001;http://+:9000
+      - ASPNETCORE_HTTPS_PORT=9001
+    volumes:
+      - ..:/workspace
+      - ~/.ssh:/root/.ssh-localhost
+      # Forwards the local Docker socket to the container.
+      - /var/run/docker.sock:/var/run/docker.sock
+      # kubernetes
+      - $HOME/.kube:/root/.kube-localhost
+      # dotnet dev-certs https -ep C:\Users\Root\AppData\Roaming\ASP.NET\Https\WebApp30.pfx -p fea04367-1bda-4cde-8989-2d1e06dfa48d
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity

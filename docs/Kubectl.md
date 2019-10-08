@@ -1,35 +1,54 @@
-# Kubectl Commands
+# Kubectl Commands Lab
 
 ## [Kubectl Context and Configuration](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration)
 
-To setup configuration
+- To setup K8 configuration Steps 1-6
 
 ```bash
-    # displays all available contexts and configurations
+    # Step 1: displays all available contexts and configurations
     kubectl config get-contexts
 
-    # display the name of the current context
+    # Step 2: display the name of the current context
     kubectl config current-context
 
-    # switch to docker k8 local engine
+    # Step 3: switch to docker k8 local engine
     kubectl config use-context docker-for-desktop
 
-    # display all of the existing namespaces
+    # Step 4: display all of the existing namespaces
     kubectl get namespaces
 
-    # if dev namespace doesn't exist create it
+    # Step 5: if dev namespace doesn't exist create it
     kubectl create namespace dev
 
-    # set default namespace to dev
+    # Step 6: set default namespace to dev
     kubectl config set-context --current --namespace=dev
 ```
 
-
-- Delete history of CronJobs
+- Step 7 - Create FrontEnd
 
 ```bash
-    kubectl delete jobs $(kubectl get jobs -o custom-columns=:.metadata.name)
+    kubectl create -f k8s/k8netcorev1/charts/frontend/templates/frontend-service.yaml -n dev
+    kubectl create -f k8s/k8netcorev1/charts/frontend/templates/frontend.yaml -n dev
+```
+- Step 8 Create CronJobs
 
-    # or
+```bash
+    kubectl create -f k8s/k8netcorev1/charts/cronjobs/templates/cronjob-convert.yaml -n dev
+    kubectl create -f k8s/k8netcorev1/charts/cronjobs/templates/cronjob-import.yaml -n dev
+```
+
+- Step 9 Clean up
+
+```bash
+    # delete frontend
+    kubectl delete -f k8s/k8netcorev1/charts/frontend/templates/frontend-service.yaml -n dev
+    kubectl delete -f k8s/k8netcorev1/charts/frontend/templates/frontend.yaml -n dev
+
+    # delete cronjobs
+    kubectl delete -f k8s/k8netcorev1/charts/cronjobs/templates/cronjob-convert.yaml -n dev
+    kubectl delete -f k8s/k8netcorev1/charts/cronjobs/templates/cronjob-import.yaml -n dev
+
+    # delete jobs history
     kubectl delete jobs --all --cascade=false
 ```
+

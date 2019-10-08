@@ -1,7 +1,9 @@
 #------------------------------------------------------------------------------------------------------------------------
 # BUILD:        docker build -t com.io/k8.demo.cronjobs:v1 -f "./src/K8.LongProcess/Dockerfile" --build-arg PAT --build-arg FEED .
 #
-# RUN:          docker run --rm -d com.io/k8.demo.cronjobs:v1 --name k8.cronjobs -t Convert -d 10 -c 5
+# RUN:          docker run --rm -d com.io/k8.demo.cronjobs:v1 -t Convert -d 10 -c 5
+#
+#               docker run --rm -d com.io/k8.demo.cronjobs:v1 -t Import -d 20 -c 10
 #
 # USAGE:        This is base image for the K8s CronJobs for DotNetCore Worker Console app.
 #

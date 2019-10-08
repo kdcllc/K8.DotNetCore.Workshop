@@ -19,6 +19,5 @@ make sure the existing docker images are removed before rebuilding it.
 3. Run the tool
 
 ```bash
-
-    
+    appauthentication run --verbose:debug
 ```

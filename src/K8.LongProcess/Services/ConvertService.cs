@@ -24,7 +24,7 @@ namespace K8.LongProcess.Services
             for (var i = 0; i < count; i++)
             {
                 _logger.LogInformation(
-                    "Executing {serviceName} - {count}- Key Vault",
+                    "Executing {serviceName} - {count}- Key Vault - {keyValue}",
                     nameof(ConvertService),
                     i,
                     _configuration.GetValue<string>("AzCronJobKey"));

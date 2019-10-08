@@ -1,3 +1,5 @@
+# BUILD:        docker build --rm -f "Dockerfile.vscode" -t com.io/k8.demo.vscode:v1 .
+
 # Build image
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-bionic as builder
 
@@ -42,7 +44,7 @@ RUN apt-get update \
     && echo '\n\
         if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then\n\
             mkdir -p $HOME/.kube\n\
-            cp -r $HOME/.kube-localhost/* $HOME/.kube\n\
+            cp -r $HOME/.kube/* $HOME/.kube\n\
             sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
         \n\
             if [ -d "$HOME/.minikube-localhost" ]; then\n\

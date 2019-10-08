@@ -27,9 +27,16 @@
 - Step 7 - Create FrontEnd
 
 ```bash
+    # create front end service
     kubectl create -f k8s/k8netcorev1/charts/frontend/templates/frontend-service.yaml -n dev
+
+    # create front end ingress
+    kubectl create -f k8s/k8netcorev1/charts/frontend/templates/ingress.yaml -n dev
+
+    # create front end deployment
     kubectl create -f k8s/k8netcorev1/charts/frontend/templates/frontend.yaml -n dev
 ```
+
 - Step 8 Create CronJobs
 
 ```bash
@@ -42,6 +49,7 @@
 ```bash
     # delete frontend
     kubectl delete -f k8s/k8netcorev1/charts/frontend/templates/frontend-service.yaml -n dev
+    kubectl create -f k8s/k8netcorev1/charts/frontend/templates/ingress.yaml -n dev
     kubectl delete -f k8s/k8netcorev1/charts/frontend/templates/frontend.yaml -n dev
 
     # delete cronjobs
@@ -51,4 +59,3 @@
     # delete jobs history
     kubectl delete jobs --all --cascade=false
 ```
-

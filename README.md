@@ -1,13 +1,24 @@
 # Kubernetes DotNetCore Workshop
 
-This workshop will provide with ability to learn the basic Kubernetes from DotNetCore developer perspective.
+This workshop will provide with ability to learn the basics of the Kubernetes development from DotNetCore developer perspective.
 
-- ApsNetCore 3.0 Azure Key Vault
-- DotNetCore 3.0 Worker Hosted in the Cluster and ran as CronJob
+The solution includes the following projects:
+
+- `K8.AspNetCore.HealthChecks.csproj` - a simple project that demonstrates how to add custom HealthChecks.
+- `K8.Extensions.Configuration.csproj` - a project that creates a custom Azure Key Vault Secrets retrieval.
+- `K8.Extensions.Hosting.csproj` - a project that demonstrates how to extend hosting creation for the common K8s projects.
+- `K8.FrontEnd.csproj` - the `AspNetCore` Web Api project that demonstrates usage of health and liveliness checks.
+- `K8.LongProcess.csproj` - the DotNetCore 3.0 Worker Hosted Console App that runs custom K8s CronJobs.
 
 - Docker Containers
 - Kubernetes Cluster
 - Helm deployment
+
+## Pre-requisites
+
+1. Docker and Docker Kubernetes Local Cluster
+2. Visual Studio Code
+
 
 ## Running locally
 

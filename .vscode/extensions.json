@@ -1,13 +1,18 @@
 {
-    "recommendations": [
-      "ms-vscode.csharp",
-      "jchannon.csharpextensions",
-      "EditorConfig.EditorConfig",
-      "ms-vscode-remote.vscode-remote-extensionpack",
-      "docsmsft.docs-authoring-pack",
-      "ms-vscode.vscode-node-azure-pack",
-      "streetsidesoftware.code-spell-checker",
-      "formulahendry.dotnet-test-explorer",
-      "eamodio.gitlens"
-    ]
-  }
+  "recommendations": [
+    "docsmsft.docs-authoring-pack",
+    "eamodio.gitlens",
+    "EditorConfig.EditorConfig",
+    "jchannon.csharpextensions",
+    "ms-azuretools.vscode-docker",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "ms-vscode-remote.vscode-remote-extensionpack",
+    "ms-vscode.azure-account",
+    "ms-vscode.azurecli",
+    "ms-vscode.csharp",
+    "ms-vscode.vscode-node-azure-pack",
+    "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker",
+    "technosophos.vscode-helm",
+  ]
+}

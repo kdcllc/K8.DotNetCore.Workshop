@@ -1,24 +1,37 @@
-# BUILD docker build -t com.io/k8.demo.base:v1 -f "Dockerfile.base" .
+#------------------------------------------------------------------------------------------------------------------------
+# BUILD:        docker build -t com.io/k8.demo.base:v1 -f "Dockerfile.base" .
+#
+# USAGE:        This is a base image for the solution.
+#               It provides a way to inject Azure DevOps Nuget PAT token and also URL for custom feeds.
+#
+# REQ:          Enviroment Variables on the hosted machine
+#
+#               $Env:PAT
+#               [Environment]::SetEnvironmentVariable("PAT", "{value}", "User")
+#
+#               $Env:FEED
+#               [Environment]::SetEnvironmentVariable("FEED", "https://pkgs.dev.azure.com/{org_name}}/_packaging/{feed_name}}/nuget/v3/index.json", "User")
+#------------------------------------------------------------------------------------------------------------------------
+
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
 WORKDIR /app
 
+# Install Nuget Credential Provider
 RUN apk add --no-cache bash \
     && apk add curl \
     && wget -qO- https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh | bash
 
+# Configure NUGET Custom Feed
 ENV NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED=true
-
 ONBUILD ARG PAT
 ONBUILD ARG FEED
-
-#NUGET
 ONBUILD ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS "{\"endpointCredentials\": [{\"endpoint\":\"${FEED}\", \"username\":\"build\", \"password\":\"${PAT}\"}]}"
-#NUGET
 
 ONBUILD RUN if [ -z "$PAT" ]; then \
       echo "\e[31mMake sure the PAT environment variable has been provided.\e[0m" \
       && exit 1; \
    fi
+#NUGET
 
 ONBUILD COPY ./build/ ./build/
 ONBUILD COPY ./Directory.Build.props ./Directory.Build.props

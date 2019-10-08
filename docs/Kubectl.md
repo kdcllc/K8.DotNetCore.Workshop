@@ -49,7 +49,7 @@
 ```bash
     # delete frontend
     kubectl delete -f k8s/k8netcorev1/charts/frontend/templates/frontend-service.yaml -n dev
-    kubectl create -f k8s/k8netcorev1/charts/frontend/templates/ingress.yaml -n dev
+    kubectl delete -f k8s/k8netcorev1/charts/frontend/templates/ingress.yaml -n dev
     kubectl delete -f k8s/k8netcorev1/charts/frontend/templates/frontend.yaml -n dev
 
     # delete cronjobs
@@ -58,4 +58,6 @@
 
     # delete jobs history
     kubectl delete jobs --all --cascade=false
+    # delete pods
+    kubectl delete pods --all --cascade=false
 ```

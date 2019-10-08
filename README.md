@@ -31,6 +31,7 @@ The solution includes the following projects:
     # launch the dashboard
     kubectl proxy
 ```
+
 [Open K8 Cluster Local Dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/overview?namespace=default)
 
 4. Update Windows 10 Hosts file update to include `C:\Windows\System32\drivers\etc\hosts`
@@ -42,6 +43,7 @@ The solution includes the following projects:
 [http://k8-frontend-app.local/weatherforecast](http://k8-frontend-app.local/weatherforecast)
 
 5. Install `Ngnix` Ingress Controller
+
 ```bash
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.24.1/deploy/mandatory.yaml
 

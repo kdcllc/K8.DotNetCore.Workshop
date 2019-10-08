@@ -15,6 +15,7 @@ The solution includes the following projects:
 - Docker Containers
 - Kubernetes Cluster
 - Helm deployment
+- Microsoft Azure Managed Identity (MSI)
 
 ## Pre-requisites
 
@@ -23,7 +24,7 @@ The solution includes the following projects:
 
 2. Visual Studio Code
 
-3. Install alternative K8 dashboard
+3. [Install alternative K8 dashboard](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1)
 
 ```bash
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml
@@ -55,6 +56,9 @@ The solution includes the following projects:
 
 6. [Install `Local MSI Azure Local Authenticator`](./docs/azure-vault.md)
 
+7. Azure Key Vault
+
+
 ## Labs
 
 1. [Lab: Build Docker Images](./docs/docker.md)
@@ -65,5 +69,23 @@ The solution includes the following projects:
 ## References
 
 - [LIVENESS PROBES ARE DANGEROUS](https://srcco.de/posts/kubernetes-liveness-probes-are-dangerous.html)
+
 - [Getting external traffic into Kubernetes – ClusterIp, NodePort, LoadBalancer, and Ingress](https://www.ovh.com/blog/getting-external-traffic-into-kubernetes-clusterip-nodeport-loadbalancer-and-ingress/)
+
 - [Kubernetes Ingress scenario](https://codeburst.io/replicate-kubernetes-ingress-locally-with-docker-compose-2872e650af6b)
+
+- [Deploying a Stateful Application on Azure Kubernetes Service (AKS)](https://blog.risingstack.com/deploying-a-stateful-application-on-azure-kubernetes-service-aks/)
+
+- [Use Azure managed identities with Azure Kubernetes Services (AKS)](https://blog.jcorioland.io/archives/2018/09/05/azure-aks-active-directory-managed-identities.html)
+
+- [Azure/aad-pod-identity](https://github.com/Azure/aad-pod-identity)
+
+- [Control access to cluster resources using role-based access control and Azure Active Directory identities in Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac)
+
+- [Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip)
+
+- [https://dev.to/ianknighton/deploying-a-microservice-on-azure-kubernetes-with-lets-encrypt-4eon](https://dev.to/ianknighton/deploying-a-microservice-on-azure-kubernetes-with-lets-encrypt-4eon)
+
+- [Service principals with Azure Kubernetes Service (AKS)- Manually create a service principal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal#manually-create-a-service-principal)
+
+- [fbeltrao/aks-letsencrypt](https://github.com/fbeltrao/aks-letsencrypt/blob/master/install-nginx-ingress.md)

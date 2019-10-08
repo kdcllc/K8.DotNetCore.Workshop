@@ -40,19 +40,20 @@ The solution includes the following projects:
     127.0.0.1 kubernetes.docker.internal k8-frontend-app.local
 ```
 
-[http://k8-frontend-app.local/weatherforecast](http://k8-frontend-app.local/weatherforecast)
+[https://k8-frontend-app.local/weatherforecast](https://k8-frontend-app.local/weatherforecast)
 
-5. Install `Ngnix` Ingress Controller
+5. [Install `Ngnix` Ingress Controller](https://kubernetes.github.io/ingress-nginx/deploy/#docker-for-mac)
 
 ```bash
-    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.24.1/deploy/mandatory.yaml
+    # installation
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml
 
-    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.24.1/deploy/provider/cloud-generic.yaml
-
-    kubectl get svc --namespace=ingress-nginx
+    # validate installation
+    kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx --watch
 ```
 
-6. [Install `Local Azure Key Vault Authenticator`](./docs/azure-vault.md)
+6. [Install `Local MSI Azure Local Authenticator`](./docs/azure-vault.md)
 
 ## Labs
 

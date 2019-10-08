@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "frontend.fullname" . }}
+  name: {{ template "frontend.fullname" . }}-service
   labels:
-    app: {{ template "frontend.name" . }}
+    app: {{ template "frontend.fullname" . }}
     chart: {{ template "frontend.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -15,5 +15,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "frontend.name" . }}
+    app: {{ template "frontend.fullname" . }}
     release: {{ .Release.Name }}

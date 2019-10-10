@@ -27,7 +27,15 @@ namespace K8.FrontEnd
             services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo { Title = $"{AppName} API", Version = "v1" }));
 
             services.AddHealthChecks()
-                .AddSigtermCheck("Sigterm_shutdown_check");
+                .AddSigtermCheck("Sigterm_shutdown_check")
+                .AddAzureBlobStorageCheck("AzureStorageConnectionCheck", "ContainerA", (options) =>
+                {
+                    options.ConnectionString = Configuration.GetSection("AzureStorageConnection").Value;
+                })
+                .AddAzureBlobStorageCheck("AzureStorageNameCheck", "ContainerB", (options) =>
+                {
+                    options.Name = Configuration.GetSection("AzureStorageName").Value;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using K8.AspNetCore.HealthChecks.AzureBlobStorage;
 using K8.AspNetCore.HealthChecks.SigtermCheck;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,24 @@ namespace K8.AspNetCore.HealthChecks
 {
     public static class HealthCheckBuilderExtensions
     {
+        public static IHealthChecksBuilder AddAzureBlobStorageCheck(
+            this IHealthChecksBuilder builder,
+            string name,
+            string containerName,
+            Action<StorageAccountOptions> setup,
+            HealthStatus? failureStatus = default,
+            IEnumerable<string> tags = default)
+        {
+            var options = new StorageAccountOptions();
+            setup?.Invoke(options);
+
+            builder.Services.AddOptions<StorageAccountOptions>(name).Configure((opt) => opt = options);
+
+            builder.AddCheck<AzureBlobStorageHealthCheck>(name, failureStatus ?? HealthStatus.Degraded, tags);
+
+            return builder;
+        }
+
         /// <summary>
         /// Add SIGTERM Healcheck that provides notification for orchestrator with unhealthy status once the application begins to shut down.
         /// </summary>

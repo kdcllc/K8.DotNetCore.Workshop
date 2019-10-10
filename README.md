@@ -19,31 +19,36 @@ The solution includes the following projects:
 
 ## Pre-requisites
 
-1. Docker and Docker Kubernetes Local Cluster
+1. Install Docker and Local Kubernetes Cluster on Windows 10
+
+- [Install Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v)
+
+- [Install Docker Desktop on Windows](https://docs.docker.com/docker-for-windows/install/)
+
+- Enable Local Kubernetes Cluster: Docker --> Settings --> Kubernetes
 ![Windows 10 Kubernetes local cluster](./docs/img/win10-docker-k8s-local-cluster.jpg)
 
-2. Visual Studio Code
+- [Install alternative K8 dashboard](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1)
 
-3. [Install alternative K8 dashboard](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1)
+This dashboard doesn't require token authentication, since the cluster is running on the local machine.
 
 ```bash
+    # install
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml
 
     # launch the dashboard
     kubectl proxy
+
+    # dashboard url 'http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/overview?namespace=default'
 ```
 
-[Open K8 Cluster Local Dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/overview?namespace=default)
+The UI dashboard is useful for learning and management purposes.
 
-4. Update Windows 10 Hosts file update to include `C:\Windows\System32\drivers\etc\hosts`
+[Open Local Kuberbetes Cluster Dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/overview?namespace=default)
 
-```txt
-    127.0.0.1 kubernetes.docker.internal k8-frontend-app.local
-```
+- [Install `Ngnix` Ingress Controller inside Local Kubernetes Cluster](https://kubernetes.github.io/ingress-nginx/deploy/#docker-for-mac)
 
-[https://k8-frontend-app.local/weatherforecast](https://k8-frontend-app.local/weatherforecast)
-
-5. [Install `Ngnix` Ingress Controller](https://kubernetes.github.io/ingress-nginx/deploy/#docker-for-mac)
+This component is required for the labs.
 
 ```bash
     # installation
@@ -54,9 +59,26 @@ The solution includes the following projects:
     kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx --watch
 ```
 
-6. [Install `Local MSI Azure Local Authenticator`](./docs/azure-vault.md)
+2. [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
-7. Azure Key Vault
+3. [Install Visual Studio Code](https://code.visualstudio.com/insiders/)
+
+4. Update Windows 10 Hosts file update to include `C:\Windows\System32\drivers\etc\hosts`
+
+```txt
+    127.0.0.1 kubernetes.docker.internal k8-frontend-app.local
+```
+
+This `hosts` entry provides with the following local development Url for the application
+
+[https://k8-frontend-app.local/weatherforecast](https://k8-frontend-app.local/weatherforecast)
+
+5. [Install `Local Managed Service Identity (MSI) Azure Local Authenticator`](./docs/azure-vault.md)
+
+6. [Create Azure Key Vault](https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-create)
+
+7. [Create Azure Storage Account](./docs/azure-storage.md)
+
 
 
 ## Labs

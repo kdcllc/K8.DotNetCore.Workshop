@@ -21,3 +21,9 @@ make sure the existing docker images are removed before rebuilding it.
 ```bash
     appauthentication run --verbose:debug
 ```
+
+## Library
+
+```bash
+    dotnet add package Microsoft.Azure.Services.AppAuthentication
+```

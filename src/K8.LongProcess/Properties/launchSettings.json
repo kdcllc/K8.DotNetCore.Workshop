@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "K8.LongProcess": {
+      "commandName": "Project",
+      "commandLineArgs": "-t Convert -d 10 -c 5"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "commandLineArgs": "--build-arg PAT --build-arg FEED"
+    }
+  }
+}

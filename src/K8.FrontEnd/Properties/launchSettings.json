@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "K8.FrontEnd": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5000/swagger"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "commandLineArgs": "--build-arg PAT --build-arg FEED",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "httpPort": 5000,
+      "useSSL": true,
+      "sslPort": 5001
+    }
+  }
+}

@@ -27,10 +27,12 @@ ONBUILD ARG PAT
 ONBUILD ARG FEED
 ONBUILD ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS "{\"endpointCredentials\": [{\"endpoint\":\"${FEED}\", \"username\":\"build\", \"password\":\"${PAT}\"}]}"
 
-ONBUILD RUN if [ -z "$PAT" ]; then \
-      echo "\e[31mMake sure the PAT environment variable has been provided.\e[0m" \
-      && exit 1; \
-   fi
+# if custom nuget feed is used enable this check. enabling this breaks vs.net
+# ONBUILD RUN if [ -z "$PAT" ]; then \
+#       echo "\e[31mMake sure the PAT environment variable has been provided.\e[0m" \
+#       && exit 1; \
+#    fi
+
 #NUGET
 
 ONBUILD COPY ./build/ ./build/

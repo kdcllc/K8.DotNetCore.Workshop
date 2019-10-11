@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using K8.AspNetCore.HealthChecks.AzureBlobStorage;
 using K8.AspNetCore.HealthChecks.SigtermCheck;
 
@@ -10,6 +11,16 @@ namespace K8.AspNetCore.HealthChecks
 {
     public static class HealthCheckBuilderExtensions
     {
+        /// <summary>
+        /// Adds Azure Storage Health Check.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="name"></param>
+        /// <param name="containerName"></param>
+        /// <param name="setup"></param>
+        /// <param name="failureStatus"></param>
+        /// <param name="tags"></param>
+        /// <returns></returns>
         public static IHealthChecksBuilder AddAzureBlobStorageCheck(
             this IHealthChecksBuilder builder,
             string name,
@@ -21,7 +32,14 @@ namespace K8.AspNetCore.HealthChecks
             var options = new StorageAccountOptions();
             setup?.Invoke(options);
 
-            builder.Services.AddOptions<StorageAccountOptions>(name).Configure((opt) => opt = options);
+            builder.Services.AddOptions<StorageAccountOptions>(name)
+                .Configure((opt) =>
+                {
+                    opt.ConnectionString = options.ConnectionString;
+                    opt.ContainerName = containerName;
+                    opt.Name = options.Name;
+                    opt.Token = options.Token;
+                });
 
             builder.AddCheck<AzureBlobStorageHealthCheck>(name, failureStatus ?? HealthStatus.Degraded, tags);
 

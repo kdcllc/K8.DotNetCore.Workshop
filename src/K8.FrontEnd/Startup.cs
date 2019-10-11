@@ -28,11 +28,11 @@ namespace K8.FrontEnd
 
             services.AddHealthChecks()
                 .AddSigtermCheck("Sigterm_shutdown_check")
-                .AddAzureBlobStorageCheck("AzureStorageConnectionCheck", "ContainerA", (options) =>
+                .AddAzureBlobStorageCheck("AzureStorageConnectionCheck", "container1", (options) =>
                 {
                     options.ConnectionString = Configuration.GetSection("AzureStorageConnection").Value;
                 })
-                .AddAzureBlobStorageCheck("AzureStorageNameCheck", "ContainerB", (options) =>
+                .AddAzureBlobStorageCheck("AzureStorageNameCheck", "container2", (options) =>
                 {
                     options.Name = Configuration.GetSection("AzureStorageName").Value;
                 });

@@ -15,8 +15,6 @@ namespace K8.AspNetCore.HealthChecks.AzureBlobStorage
 {
     public class AzureBlobStorageHealthCheck : IHealthCheck
     {
-        private readonly string _containerName;
-
         private IOptionsMonitor<StorageAccountOptions> _options;
         private ILogger<AzureBlobStorageHealthCheck> _logger;
 
@@ -30,23 +28,26 @@ namespace K8.AspNetCore.HealthChecks.AzureBlobStorage
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
+            var checkName = context.Registration.Name;
+            var options = _options.Get(checkName);
+            var fullCheckName = $"{checkName}-{options?.ContainerName}";
+
             try
             {
-                var checkName = context.Registration.Name;
-
-                var options = _options.Get(checkName);
-
                 var cloudStorageAccount = await GetStorageAccountAsync(options);
                 var cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
 
-                var cloudBlobContainer = cloudBlobClient.GetContainerReference(_containerName);
+                var cloudBlobContainer = cloudBlobClient.GetContainerReference(options.ContainerName);
 
-                await cloudBlobContainer.CreateIfNotExistsAsync();
+                _logger.LogInformation("[HealthCheck][{healthCheckName}]", fullCheckName);
 
-                return new HealthCheckResult(HealthStatus.Healthy, $"{checkName}-{_containerName}");
+                await cloudBlobContainer.CreateIfNotExistsAsync(cancellationToken);
+
+                return new HealthCheckResult(HealthStatus.Healthy, fullCheckName);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "[HealthCheck][{healthCheckName}]", fullCheckName);
                 return new HealthCheckResult(context.Registration.FailureStatus, exception: ex);
             }
         }
@@ -54,6 +55,8 @@ namespace K8.AspNetCore.HealthChecks.AzureBlobStorage
         private async Task<NewTokenAndFrequency> TokenRenewerAsync(object state, CancellationToken cancellationToken)
         {
             var sw = Stopwatch.StartNew();
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             var (authResult, next) = await GetToken(state);
 
@@ -96,24 +99,25 @@ namespace K8.AspNetCore.HealthChecks.AzureBlobStorage
             return (authResult, next);
         }
 
-        private async Task<CloudStorageAccount> GetStorageAccountAsync(StorageAccountOptions options)
+        private async Task<CloudStorageAccount> GetStorageAccountAsync(StorageAccountOptions options, CancellationToken cancellationToken = default)
         {
             CloudStorageAccount account;
 
-            if (options.ConnectionString != null && CloudStorageAccount.TryParse(options.ConnectionString, out var cloudStorageAccount))
+            if (!string.IsNullOrEmpty(options.ConnectionString)
+                && CloudStorageAccount.TryParse(options.ConnectionString, out var cloudStorageAccount))
             {
                 account = cloudStorageAccount;
 
                 _logger.LogInformation("Azure Storage Authentication with ConnectionString.");
             }
-            else if (options.Name != null
+            else if (!string.IsNullOrEmpty(options.Name)
                 && string.IsNullOrEmpty(options.Token))
             {
                 // Get the initial access token and the interval at which to refresh it.
                 var azureServiceTokenProvider = new AzureServiceTokenProvider();
                 var tokenAndFrequency = await TokenRenewerAsync(
                     azureServiceTokenProvider,
-                    CancellationToken.None);
+                    cancellationToken);
 
                 // Create storage credentials using the initial token, and connect the callback function
                 // to renew the token just before it expires
@@ -129,14 +133,13 @@ namespace K8.AspNetCore.HealthChecks.AzureBlobStorage
 
                 account = new CloudStorageAccount(storageCredentials, options.Name, string.Empty, true);
 
-                _logger.LogInformation("Azure Storage Authentication with SAS Token.");
+                _logger.LogInformation("Azure Storage Authentication with MSI Token.");
             }
-            else if (options.Name != null
+            else if (!string.IsNullOrEmpty(options.Name)
                 && !string.IsNullOrEmpty(options.Token))
             {
                 account = new CloudStorageAccount(new StorageCredentials(options.Token), options.Name, true);
-
-                _logger.LogInformation("Azure Storage Authentication with MSI Token.");
+                _logger.LogInformation("Azure Storage Authentication with SAS Token.");
             }
             else
             {

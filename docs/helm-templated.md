@@ -14,6 +14,9 @@
 
     # remove all of the jobs history
     kubectl delete jobs --all --cascade=false
+
+    # delete pods
+    kubectl delete pods --all --cascade=false
 ```
 
 [Helm Templating Engine Reference](./docs/helm-reference.md)

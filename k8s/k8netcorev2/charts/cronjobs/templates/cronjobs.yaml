@@ -6,8 +6,9 @@
 {{- $image := .Values.image.name -}}
 {{- $tag := .Values.image.tag -}}
 {{- $imagePolicy := .Values.image.pullPolicy -}}
+{{- $env := include "env" . -}}
 {{- $root := . -}}
-{{- $name := include "cronjobs.name" . }}
+{{- $name := include "cronjobs.name" . -}}
 
 {{- range $job := .Values.jobs }}
 ---
@@ -37,6 +38,8 @@ spec:
             image: "{{ $repository }}/{{ $image }}:{{ $tag }}"
             imagePullPolicy: {{ $imagePolicy }}
             command: {{ $job.command }}
+            env:
+              {{- $env | nindent 12 }}
             args:
 {{ toYaml $job.args | indent 12 }}
           restartPolicy: {{ $job.restartPolicy }}

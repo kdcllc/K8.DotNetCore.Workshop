@@ -20,3 +20,12 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 5000
+        env:
+          - name: ASPNETCORE_URLS
+            value: "http://+:5000"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+          - name: MSI_ENDPOINT
+            value: http://host.docker.internal:5050/oauth2/token
+          - name: MSI_SECRET
+            value: 19603b25-f198-4156-a82a-b68d40681455

@@ -17,7 +17,7 @@
       <!--https://docs.microsoft.com/en-us/visualstudio/containers/container-msbuild-properties?view=vs-2019-->
     <DockerfileContext>../../.</DockerfileContext>
     <DockerfileFile>../../src/K8.FrontEnd/Dockerfile</DockerfileFile>
-    <DockerfileBuildArguments>--build-arg PAT=$(PAT) --build-arg FEED=$(FEED) --build-arg MSI_ENDPOINT=$(MSI_ENDPOINT) --build-arg MSI_SECRET=$(MSI_SECRET)</DockerfileBuildArguments>
+    <DockerfileBuildArguments>--build-arg PAT=$(PAT) --build-arg FEED=$(FEED)</DockerfileBuildArguments>
     <DockerfileRunArguments>-e MSI_ENDPOINT=$(MSI_ENDPOINT) -e MSI_SECRET=$(MSI_SECRET)</DockerfileRunArguments>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>

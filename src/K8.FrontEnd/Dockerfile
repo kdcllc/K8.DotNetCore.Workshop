@@ -1,8 +1,8 @@
 #------------------------------------------------------------------------------------------------------------------------
 # BUILD:
-#               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile" --build-arg PAT --build-arg FEED --build-arg MSI_ENDPOINT --build-arg MSI_SECRET .
+#               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile" --build-arg PAT --build-arg FEED .
 #
-#               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile" --build-arg PAT="v" --build-arg FEED="f" --build-arg MSI_ENDPOINT --build-arg MSI_SECRET .
+#               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile" --build-arg PAT="v" --build-arg FEED="f" .
 #
 #               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile"
 #
@@ -19,10 +19,6 @@ WORKDIR /app/src/K8.FrontEnd
 RUN dotnet publish -c Release -r linux-musl-x64 -o out --self-contained true /p:PublishTrimmed=true
 
 FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.0-alpine AS runtime
-
-# creates a single layer for environment variables.
-ENV ASPNETCORE_URLS \
-	ENV ASPNETCORE_ENVIRONMENT
 
 EXPOSE 5000
 

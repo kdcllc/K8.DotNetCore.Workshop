@@ -26,6 +26,9 @@ This will create instance of latest tiller on local K8 Cluster
 
     # remove all of the jobs history
     kubectl delete jobs --all --cascade=false
+
+    # delete pods
+    kubectl delete pods --all --cascade=false
 ```
 
 ## Helm commands

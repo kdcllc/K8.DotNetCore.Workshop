@@ -23,6 +23,12 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: ASPNETCORE_URLS
+            value: "http://+:5000"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+          {{- include "env" . | nindent 10 }}
           ports:
             - name: http
               containerPort: 5000

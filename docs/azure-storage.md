@@ -18,14 +18,28 @@
     az storage account list --output table
 
     # 6. create azure storage
-    az storage account create --location "Central US" --name k8demostorage --resource-group [name] --sku Standard_LRS
+    export storageName=k8demostorage
+
+    az storage account create --location "Central US" --name $storageName --resource-group k8-demo --sku Standard_LRS
 
     # 7. lists all of the storage accounts again.
     az storage account list --output table
 
     # 8. retrieve account keys
-    az storage account keys list --account-name k8demostorage --output table
+    az storage account keys list --account-name $storageName --output table
 
     # 9. retrieve account connection string (this connection string can be used for K8.FrontEnd appsettings.json)
-    az storage account show-connection-string --name k8demostorage
+    az storage account show-connection-string --name $storageName
+
+    # 10. Add connection string to azure vault
+    export connectionString="$(az storage account show-connection-string --name $storageName --output tsv)"
+    export azureVaultName=k8demovault
+    az keyvault secret set --vault-name $azureVaultName --name "AzureStorageConnection" --value $connectionString
+
+    az keyvault secret set --vault-name $azureVaultName --name "AzureStorageName" --value $storageName
 ```
+
+Access Control (IAM)
+
+Storage Blob Data Contributor
+Key Vault Contributor

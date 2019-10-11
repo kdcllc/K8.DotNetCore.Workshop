@@ -1,5 +1,23 @@
 # Azure Vault Local Development in the Containers
 
+1. Creating Azure Vault
+
+```bash
+    # create Azure vault
+    export azureVaultName=k8demovault
+    az keyvault create --location centralus --name $azureVaultName --resource-group k8-demo
+
+    # list all of the Azure Vaults
+    az keyvault list --output table
+
+    # adds secret
+    az keyvault secret set --vault-name "$azureVaultName" --name "AzCronJobKey" --value "CronJob Value for the Vault"
+
+    # shows secret
+    az keyvault secret show --name AzCronJobKey --vault-name $azureVaultName --output table
+
+```
+
 1. Install Authentication tool
 
 ```bash
@@ -21,6 +39,8 @@ make sure the existing docker images are removed before rebuilding it.
 ```bash
     appauthentication run --verbose:debug
 ```
+
+[Test generation of the Token for Azure Storage](http://localhost:5050/oauth2/token?resource=https://storage.azure.com)
 
 ## Library
 

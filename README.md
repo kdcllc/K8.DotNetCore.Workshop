@@ -3,6 +3,7 @@
 This workshop will provide with ability to learn the basics of the Kubernetes development from DotNetCore developer perspective.
 
 The solution includes the following projects:
+![Application layout](./docs/img/app-diagram.jpg)
 
 - `K8.AspNetCore.HealthChecks.csproj` - a simple project that demonstrates how to add custom HealthChecks.
 - `K8.Extensions.Configuration.csproj` - a project that creates a custom Azure Key Vault Secrets retrieval.
@@ -82,6 +83,7 @@ This `hosts` entry provides with the following local development Url for the app
 
 
 ## Labs
+![K8 Cluster and Azure Resources](./docs/img/k8-azure-diagram.jpg)
 
 1. [Lab: Build Docker Images](./docs/docker.md)
 2. [Lab: `Kubectl` commands](./docs/kubectl.md)

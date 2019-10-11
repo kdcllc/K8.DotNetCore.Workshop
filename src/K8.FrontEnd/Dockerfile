@@ -1,7 +1,12 @@
 #------------------------------------------------------------------------------------------------------------------------
-# BUILD:        docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile" --build-arg PAT --build-arg FEED .
+# BUILD:
+#               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile" --build-arg PAT --build-arg FEED --build-arg MSI_ENDPOINT --build-arg MSI_SECRET .
 #
-# RUN:          docker run -p 5000:5000  --rm -d com.io/k8.demo.frontend:v1 --name k8.frontend
+#               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile" --build-arg PAT="v" --build-arg FEED="f" --build-arg MSI_ENDPOINT --build-arg MSI_SECRET .
+#
+#               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile"
+#
+# RUN:          docker run --env-file=.env -p 5000:5000  --rm -d com.io/k8.demo.frontend:v1 --name k8.frontend
 #
 # CHECK:        wget -qO- http://localhost:5000/WeatherForecast
 #------------------------------------------------------------------------------------------------------------------------
@@ -15,12 +20,9 @@ RUN dotnet publish -c Release -r linux-musl-x64 -o out --self-contained true /p:
 
 FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.0-alpine AS runtime
 
-ENV ASPNETCORE_URLS=http://+:5000
-ENV ASPNETCORE_ENVIRONMENT=Development
-
-# uses the default port
-ENV MSI_ENDPOINT=http://host.docker.internal:5050/oauth2/token
-ENV MSI_SECRET=19603b25-f198-4156-a82a-b68d40681455
+# creates a single layer for environment variables.
+ENV ASPNETCORE_URLS \
+	ENV ASPNETCORE_ENVIRONMENT
 
 EXPOSE 5000
 

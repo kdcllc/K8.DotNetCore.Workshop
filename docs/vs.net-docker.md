@@ -1,9 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+# Visual Studio.NET 2019 Container Tools
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UserSecretsId>1cc835dc-fa54-4dfc-93b1-143f09e6b31f</UserSecretsId>
-  </PropertyGroup>
+Unfortunately Visual Studio 2019 has a limited support for the Docker and Kubernetes.
+
+1. Add Container Tools reference
+
+```bash
+   dotnet add package Microsoft.VisualStudio.Azure.Containers.Tools.Targets
+```
+
+2. Add `msbuild` support for Docker image
+
+```xml
 
   <PropertyGroup Label="Docker Variables">
     <PAT>secret</PAT>
@@ -22,14 +29,10 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\K8.AspNetCore.HealthChecks\K8.AspNetCore.HealthChecks.csproj" />
-    <ProjectReference Include="..\K8.Extensions.Hosting\K8.Extensions.Hosting.csproj" />
-  </ItemGroup>
+```
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
-  </ItemGroup>
+## References
 
-</Project>
+- [Container Tools build properties](https://docs.microsoft.com/en-us/visualstudio/containers/container-msbuild-properties?view=vs-2019)
+
+- [Docker Compose build properties](https://docs.microsoft.com/en-us/visualstudio/containers/docker-compose-properties?view=vs-2019)

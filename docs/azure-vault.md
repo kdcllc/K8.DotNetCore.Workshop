@@ -40,7 +40,9 @@ make sure the existing docker images are removed before rebuilding it.
     appauthentication run --verbose:debug
 ```
 
-[Test generation of the Token for Azure Storage](http://localhost:5050/oauth2/token?resource=https://storage.azure.com)
+4. Restart Visual Studio Code in order for the Environment Variables to load in the terminal window.
+
+[Test AppAuthentication CLI tool generation of the Token for Azure Storage](http://localhost:5050/oauth2/token?resource=https://storage.azure.com)
 
 ## Library
 

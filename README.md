@@ -92,11 +92,19 @@ This `hosts` entry provides with the following local development Url for the app
 
 ## References
 
+### General Ideas
+
 - [LIVENESS PROBES ARE DANGEROUS](https://srcco.de/posts/kubernetes-liveness-probes-are-dangerous.html)
 
 - [Getting external traffic into Kubernetes – ClusterIp, NodePort, LoadBalancer, and Ingress](https://www.ovh.com/blog/getting-external-traffic-into-kubernetes-clusterip-nodeport-loadbalancer-and-ingress/)
 
 - [Kubernetes Ingress scenario](https://codeburst.io/replicate-kubernetes-ingress-locally-with-docker-compose-2872e650af6b)
+
+### AKS specific
+
+- [Deploy a SQL Server container in Kubernetes with Azure Kubernetes Services (AKS)](https://docs.microsoft.com/en-us/sql/linux/tutorial-sql-server-containers-kubernetes?view=sql-server-ver15)
+
+- [Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip)
 
 - [Deploying a Stateful Application on Azure Kubernetes Service (AKS)](https://blog.risingstack.com/deploying-a-stateful-application-on-azure-kubernetes-service-aks/)
 
@@ -106,10 +114,18 @@ This `hosts` entry provides with the following local development Url for the app
 
 - [Control access to cluster resources using role-based access control and Azure Active Directory identities in Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac)
 
-- [Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip)
+- [Key Vault FlexVolume](https://github.com/Azure/kubernetes-keyvault-flexvol)
 
-- [https://dev.to/ianknighton/deploying-a-microservice-on-azure-kubernetes-with-lets-encrypt-4eon](https://dev.to/ianknighton/deploying-a-microservice-on-azure-kubernetes-with-lets-encrypt-4eon)
+- [Manually create and use a volume with Azure Files share in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/azure-files-volume)
+
+- [How to: Mount an Azure Storage File Share to containers in Azure Kubernetes Services (AKS)](https://zimmergren.net/mount-an-azure-storage-file-share-to-deployments-in-azure-kubernetes-services-aks/)
+
+### Ingress LetsEncrypt
 
 - [Service principals with Azure Kubernetes Service (AKS)- Manually create a service principal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal#manually-create-a-service-principal)
 
-- [fbeltrao/aks-letsencrypt](https://github.com/fbeltrao/aks-letsencrypt/blob/master/install-nginx-ingress.md)
+- [Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip)
+
+- [fbeltrao/aks-letsencrypt step thru](https://github.com/fbeltrao/aks-letsencrypt/blob/master/install-nginx-ingress.md)
+
+- [https://dev.to/ianknighton/deploying-a-microservice-on-azure-kubernetes-with-lets-encrypt-4eon](https://dev.to/ianknighton/deploying-a-microservice-on-azure-kubernetes-with-lets-encrypt-4eon)

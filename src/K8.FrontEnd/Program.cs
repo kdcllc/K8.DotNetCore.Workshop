@@ -29,7 +29,7 @@ namespace K8.FrontEnd
 
                        if (hostingContext.HostingEnvironment.IsDevelopment())
                         {
-                            configBuilder.Build().DebugConfigurations();
+                             configBuilder.Build().DebugConfigurations();
                         }
                     });
 

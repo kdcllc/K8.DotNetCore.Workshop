@@ -10,7 +10,7 @@
 
     # Step 2: display the name of the current context
     kubectl config current-context
-
+`
     # Step 3: switch to docker k8 local engine
     kubectl config use-context docker-for-desktop
 

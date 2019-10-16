@@ -5,6 +5,23 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Label="Docker Variables">
+    <PAT>secret</PAT>
+    <FEED>feed</FEED>
+    <!-- change this value if the port is different -->
+    <MSI_ENDPOINT>http://host.docker.internal:5050/oauth2/token</MSI_ENDPOINT>
+    <MSI_SECRET>19603b25-f198-4156-a82a-b68d40681455</MSI_SECRET>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Docker Container Configurations">
+    <!--https://docs.microsoft.com/en-us/visualstudio/containers/container-msbuild-properties?view=vs-2019-->
+    <DockerfileContext>../../.</DockerfileContext>
+    <DockerfileFile>../../src/K8.LongProcess/Dockerfile</DockerfileFile>
+    <DockerfileBuildArguments>--build-arg PAT=$(PAT) --build-arg FEED=$(FEED)</DockerfileBuildArguments>
+    <DockerfileRunArguments>-e MSI_ENDPOINT=$(MSI_ENDPOINT) -e MSI_SECRET=$(MSI_SECRET)</DockerfileRunArguments>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
   </ItemGroup>

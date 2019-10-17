@@ -4,10 +4,7 @@
         "*.*proj": "xml",
         "*.props": "xml",
         "*.targets": "xml",
-        "*.tasks": "xml"
-    },
-
-    "files.associations": {
+        "*.tasks": "xml",
         "Dockerfile*": "dockerfile"
     }
 }

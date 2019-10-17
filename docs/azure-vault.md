@@ -18,7 +18,7 @@
 
 ```
 
-1. Install Authentication tool
+1. Install App Authentication Global CLI tool
 
 ```bash
     dotnet tool install --global appauthentication

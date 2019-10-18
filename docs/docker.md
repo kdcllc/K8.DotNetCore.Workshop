@@ -39,6 +39,8 @@ All of the images can be build manually by running the `docker` command from the
 
 ## Docker Commands
 
+- Space used by Docker `docker system df`
+
 - Clean up system
 
 ```bash
@@ -51,3 +53,9 @@ All of the images can be build manually by running the `docker` command from the
     # clean up
     docker rmi -f $(docker images -f "dangling=true" -q)
 ```
+
+
+## References
+
+- [Handy Docker commands for local development - Part 1](https://andrewlock.net/handy-docker-commands-for-local-development-part-1/)
+- [Handy Docker commands for local development - Part 2](https://andrewlock.net/handy-docker-commands-for-local-development-part-2/)

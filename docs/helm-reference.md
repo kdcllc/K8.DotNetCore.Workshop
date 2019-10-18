@@ -26,3 +26,7 @@
 3. Kubernetes data: `{{.Capabilities.KubeVersion}} -> Kubernetes & Tiller
 4. File data: `{{.Files.Get conf.ini}}` -> conf.ini must be located in the root of the directory
 5. Template data: `{{.Template.Name}}` -> Template.Name or Template.BasePath
+
+## Helm --set
+
+[The Format and Limitations of --set](https://github.com/helm/helm/blob/master/docs/using_helm.md#the-format-and-limitations-of---set)

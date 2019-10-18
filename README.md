@@ -80,8 +80,6 @@ This `hosts` entry provides with the following local development Url for the app
 
 7. [Create Azure Storage Account](./docs/azure-storage.md)
 
-
-
 ## Labs
 ![K8 Cluster and Azure Resources](./docs/img/k8-azure-diagram.jpg)
 

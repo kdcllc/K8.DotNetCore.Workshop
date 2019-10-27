@@ -8,9 +8,11 @@
       },
       "applicationUrl": "http://localhost:5000/swagger"
     },
+
+    // https://docs.microsoft.com/en-us/visualstudio/containers/container-launch-settings?view=vs-2019
     "Docker": {
       "commandName": "Docker",
-      "commandLineArgs": "--build-arg PAT --build-arg FEED",
+      "commandLineArgs": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

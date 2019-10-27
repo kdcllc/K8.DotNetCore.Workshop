@@ -61,3 +61,23 @@
     # delete pods
     kubectl delete pods --all --cascade=false
 ```
+
+## Other helpful commands
+
+```bash
+
+    # version
+    kubectl version
+
+    # cluster information
+    kubectl cluster-info
+
+    # get all infor about pods, deployments and services
+    kubectl get all
+
+    # simple way to run a pod
+    kubectl run [container_name] --image=[image-name]
+
+    # forward a port to allow external access
+    kubectl port-forward [pod] [ports]
+```

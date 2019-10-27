@@ -90,9 +90,15 @@ This `hosts` entry provides with the following local development Url for the app
 
 ## References
 
+### Windows Terminal
+
+- [Enable Copy & Paste Keybindings](https://github.com/microsoft/terminal/issues/968#issuecomment-518568762)
+
 ### General Ideas
 
 - [LIVENESS PROBES ARE DANGEROUS](https://srcco.de/posts/kubernetes-liveness-probes-are-dangerous.html)
+
+- [Graceful termination in Kubernetes with ASP.NET Core](https://blog.markvincze.com/graceful-termination-in-kubernetes-with-asp-net-core/)
 
 - [Getting external traffic into Kubernetes – ClusterIp, NodePort, LoadBalancer, and Ingress](https://www.ovh.com/blog/getting-external-traffic-into-kubernetes-clusterip-nodeport-loadbalancer-and-ingress/)
 

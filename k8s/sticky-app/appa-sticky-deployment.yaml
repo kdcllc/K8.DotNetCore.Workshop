@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stickyapp-deployment
+  labels:
+    app: stickyapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: stickyapp
+  template:
+    metadata:
+      labels:
+        app: stickyapp
+    spec:
+      containers:
+      - name: stickyapp
+        image: docker/appa
+        ports:
+        - containerPort: 80

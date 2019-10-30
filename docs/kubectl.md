@@ -69,6 +69,12 @@
     # version
     kubectl version
 
+    # display all of the nodes
+    kubectl get nodes
+
+    # locally only one node available
+    kubectl describe node docker-desktop
+
     # cluster information
     kubectl cluster-info
 
@@ -80,4 +86,23 @@
 
     # forward a port to allow external access
     kubectl port-forward [pod] [ports]
+
+    # create namespace
+    kubectl create namespace [name]
+
+    # switch namespaces
+    kubectl config set-context docker-for-desktop --namespace dev
+
+```
+
+## Create Azure Container Repository (ACR)
+
+```bash
+    # https://kubernetes.io/docs/concepts/containers/images/#using-azure-container-registry-acr
+    $acrServer={name}.azurecr.io
+    $acrUserName=
+    $acrPassword=
+    $acrEmail=someemail@gmail.com
+
+    kubectl create secret docker-registry <name> --docker-server=$acrServer --docker-username=$acrUserName --docker-password=$acrPassword --docker-email=$acrEmail
 ```

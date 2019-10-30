@@ -124,6 +124,8 @@ This `hosts` entry provides with the following local development Url for the app
 
 - [How to: Mount an Azure Storage File Share to containers in Azure Kubernetes Services (AKS)](https://zimmergren.net/mount-an-azure-storage-file-share-to-deployments-in-azure-kubernetes-services-aks/)
 
+- [Configure agent data collection for Azure Monitor for containers](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-agent-config)
+
 ### Ingress LetsEncrypt
 
 - [Service principals with Azure Kubernetes Service (AKS)- Manually create a service principal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal#manually-create-a-service-principal)

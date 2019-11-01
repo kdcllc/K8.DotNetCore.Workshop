@@ -64,6 +64,8 @@
 
 ## Other helpful commands
 
+- Kubernetes Clsuter commands:
+
 ```bash
 
     # version
@@ -81,19 +83,48 @@
     # get all infor about pods, deployments and services
     kubectl get all
 
-    # simple way to run a pod
-    kubectl run [container_name] --image=[image-name]
-
-    # forward a port to allow external access
-    kubectl port-forward [pod] [ports]
-
-    # create namespace
-    kubectl create namespace [name]
-
     # switch namespaces
     kubectl config set-context docker-for-desktop --namespace dev
 
 ```
+
+- Pods specific commands:
+
+```bash
+
+    # simple way to run a pod
+    kubectl run [podname] --image=[image-name]
+
+    # get pods
+    kubectl get pods
+
+    # get info on the pod
+    kubectl describe pod [podname]
+
+    # executes pod with bash
+    kubectl exec [podname] -it sh
+
+    # forward a port to allow external access
+    kubectl port-forward [podname] [ports]
+
+    # delete pod by deployement re-creates it
+    kubectl delete pod [podname]
+```
+
+- Deployments specific commands:
+
+```bash
+    # create namespace
+    kubectl create namespace [name]
+
+    # create deployment/ validate is default value
+    kubectl create -f file.yaml --dry-run --validate=true
+
+    # delete the deployment by name
+    kubectl delete deployment [deployname]
+
+```
+
 
 ## Create Azure Container Repository (ACR)
 

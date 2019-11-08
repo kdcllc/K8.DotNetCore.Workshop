@@ -6,7 +6,8 @@
 #
 #               docker build -t com.io/k8.demo.frontend:v1 -f "./src/K8.FrontEnd/Dockerfile"
 #
-# RUN:          docker run --env-file=.env -p 5000:5000  --rm -d com.io/k8.demo.frontend:v1 --name k8.frontend
+# RUN:          docker run  -p 5000:80 -e MSI_ENDPOINT=http://host.docker.internal:5050/oauth2/token -e MSI_SECRET=123455 --rm -d com.io/k8.demo.frontend:v1 --name k8.frontend
+#               (make sure appauthentication run --verbose:debug is running)
 #
 # CHECK:        wget -qO- http://localhost:5000/WeatherForecast
 #------------------------------------------------------------------------------------------------------------------------

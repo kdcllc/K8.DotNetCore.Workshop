@@ -4,6 +4,7 @@
     </PropertyGroup>
 
    <ItemGroup Label="Analyzers">
-    <PackageReference Include="Bet.CodeAnalyzers" Version="1.0.6" PrivateAssets="All" />
+    <PackageReference Include="Bet.CodeAnalyzers" Version="1.0.10" PrivateAssets="All" />
+    <PackageReference Include="Bet.EditorConfig" Version="1.0.10" PrivateAssets="All" />
   </ItemGroup>
 </Project>

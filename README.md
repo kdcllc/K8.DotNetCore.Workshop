@@ -61,6 +61,16 @@ This component is required for the labs.
 ```
 
 2. [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+[Azure CLI Releases](https://docs.microsoft.com/en-us/cli/azure/release-notes-azure-cli?view=azure-cli-latest)
+```powershell
+    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+    Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
+```
+WSL2
+
+```bash
+ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
 
 3. [Install Visual Studio Code](https://code.visualstudio.com/insiders/)
 
